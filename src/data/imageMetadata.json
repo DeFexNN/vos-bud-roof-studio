@@ -1,0 +1,23 @@
+{
+  "01-before": { "width": 1080, "height": 1080 },
+  "01-after": { "width": 1080, "height": 1080 },
+  "01-collage": { "width": 1080, "height": 1080 },
+  "02-before": { "width": 3072, "height": 4096 },
+  "02-after": { "width": 3072, "height": 4096 },
+  "03-before": { "width": 3072, "height": 4096 },
+  "03-after": { "width": 3072, "height": 4096 },
+  "04-before": { "width": 1440, "height": 1800 },
+  "04-after": { "width": 1440, "height": 1800 },
+  "05-before": { "width": 1080, "height": 1080 },
+  "05-after": { "width": 1080, "height": 1080 },
+  "06-before": { "width": 1080, "height": 1080 },
+  "06-after": { "width": 1080, "height": 1080 },
+  "07-before": { "width": 1440, "height": 1920 },
+  "07-after": { "width": 1440, "height": 1920 },
+  "08-before": { "width": 1130, "height": 1504 },
+  "08-after": { "width": 3072, "height": 4096 },
+  "09-before": { "width": 3072, "height": 4096 },
+  "09-after": { "width": 3072, "height": 4096 },
+  "10-before": { "width": 3072, "height": 4096 },
+  "10-after": { "width": 3072, "height": 4096 }
+}
