@@ -1,0 +1,87 @@
+{
+  "sourceRevision": "7f56c9a32eea64f0586a6b3547267fa27a86c7b8",
+  "target": "http://localhost:3000",
+  "date": "2026-10-26T20:47:47.717Z",
+  "reports": [
+    {
+      "name": "/pl/",
+      "violations": []
+    },
+    {
+      "name": "/pl/podejscie/",
+      "violations": []
+    },
+    {
+      "name": "/pl/realizacje/",
+      "violations": []
+    },
+    {
+      "name": "/pl/materialy/",
+      "violations": []
+    },
+    {
+      "name": "/pl/studio/",
+      "violations": []
+    },
+    {
+      "name": "/pl/kosztorys/",
+      "violations": []
+    },
+    {
+      "name": "/pl/kontakt/",
+      "violations": []
+    },
+    {
+      "name": "/pl/prywatnosc/",
+      "violations": []
+    },
+    {
+      "name": "/pl/realizacje/nowy-rozdzial/",
+      "violations": []
+    },
+    {
+      "name": "/en/",
+      "violations": []
+    },
+    {
+      "name": "/en/approach/",
+      "violations": []
+    },
+    {
+      "name": "/en/projects/",
+      "violations": []
+    },
+    {
+      "name": "/en/materials/",
+      "violations": []
+    },
+    {
+      "name": "/en/studio/",
+      "violations": []
+    },
+    {
+      "name": "/en/estimate/",
+      "violations": []
+    },
+    {
+      "name": "/en/contact/",
+      "violations": []
+    },
+    {
+      "name": "/en/privacy/",
+      "violations": []
+    },
+    {
+      "name": "/en/projects/nowy-rozdzial/",
+      "violations": []
+    },
+    {
+      "name": "fullscreen project dialog",
+      "violations": []
+    },
+    {
+      "name": "mobile navigation dialog",
+      "violations": []
+    }
+  ]
+}

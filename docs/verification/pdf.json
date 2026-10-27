@@ -1,0 +1,43 @@
+{
+  "sourceRevision": "7f56c9a32eea64f0586a6b3547267fa27a86c7b8",
+  "downloadTarget": "https://defexnn.github.io/vos-bud-roof-studio",
+  "inspectionDate": "2026-10-27",
+  "results": [
+    {
+      "file": "qa/estimate-pl.pdf",
+      "passed": true,
+      "pages": 7,
+      "embedded_fonts": [
+        "Noto",
+        "Noto"
+      ],
+      "polish_characters": [
+        "ó",
+        "ą",
+        "ć",
+        "ę",
+        "Ł",
+        "ł",
+        "ń",
+        "ś",
+        "Ź",
+        "ź",
+        "ż"
+      ],
+      "all_text_within_page": true
+    },
+    {
+      "file": "qa/estimate-en.pdf",
+      "passed": true,
+      "pages": 7,
+      "embedded_fonts": [
+        "Noto",
+        "Noto"
+      ],
+      "polish_characters": [
+        "ś"
+      ],
+      "all_text_within_page": true
+    }
+  ]
+}

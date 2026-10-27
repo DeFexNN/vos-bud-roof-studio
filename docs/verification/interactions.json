@@ -1,0 +1,59 @@
+{
+  "sourceRevision": "7f56c9a32eea64f0586a6b3547267fa27a86c7b8",
+  "target": "https://defexnn.github.io/vos-bud-roof-studio",
+  "date": "2026-10-26T21:16:44.261Z",
+  "results": [
+    {
+      "name": "Invalid geometry withholds totals and exports; correction recovers",
+      "passed": true
+    },
+    {
+      "name": "Studio tabs support arrows, Home and End with roving focus",
+      "passed": true
+    },
+    {
+      "name": "Browser bundle mode replaces all task installation lines",
+      "passed": true
+    },
+    {
+      "name": "Residential VAT blocks unconfirmed eligibility, then applies 300/400 proportion",
+      "passed": true
+    },
+    {
+      "name": "Supply-only mode removes installation costs in the public bill",
+      "passed": true
+    },
+    {
+      "name": "Full page reload restores product, dimensions and roof configuration",
+      "passed": true
+    },
+    {
+      "name": "Copied share link recreates the actual roof in a clean browser context",
+      "passed": true
+    },
+    {
+      "name": "Entry route remembers a deliberate English language preference",
+      "passed": true
+    },
+    {
+      "name": "Material teaser deep links and subsequent selections stay synchronized",
+      "passed": true
+    },
+    {
+      "name": "Three scenarios apply different real assemblies and totals",
+      "passed": true
+    },
+    {
+      "name": "Real touch-event dragging operates the photographic comparison",
+      "passed": true
+    },
+    {
+      "name": "Touch fullscreen and mobile navigation open, navigate and close",
+      "passed": true
+    },
+    {
+      "name": "Mobile homepage load and resource timing sample recorded",
+      "passed": true
+    }
+  ]
+}

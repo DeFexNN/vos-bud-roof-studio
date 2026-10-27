@@ -1,0 +1,557 @@
+{
+  "sourceRevision": "7f56c9a32eea64f0586a6b3547267fa27a86c7b8",
+  "target": "https://defexnn.github.io/vos-bud-roof-studio",
+  "date": "2026-10-26T21:18:51.357Z",
+  "results": [
+    {
+      "name": "Polish is default entry language",
+      "passed": true
+    },
+    {
+      "name": "Hero roof colour interaction",
+      "passed": true
+    },
+    {
+      "name": "Roof pitch changes geometry and measured area",
+      "passed": true,
+      "renderedArea": 154.492094,
+      "changedPixels": true
+    },
+    {
+      "name": "Building length changes geometry and estimate",
+      "passed": true,
+      "renderedArea": 190.420488,
+      "changedPixels": true
+    },
+    {
+      "name": "Building width changes geometry and estimate",
+      "passed": true,
+      "renderedArea": 211.816048,
+      "changedPixels": true
+    },
+    {
+      "name": "Overhang changes geometry and estimate",
+      "passed": true,
+      "renderedArea": 225.918279,
+      "changedPixels": true
+    },
+    {
+      "name": "Parametric Mono-pitch roof",
+      "passed": true,
+      "renderedArea": 225.918279,
+      "changedPixels": true
+    },
+    {
+      "name": "Parametric Hip roof",
+      "passed": true,
+      "renderedArea": 225.918279,
+      "changedPixels": true
+    },
+    {
+      "name": "Parametric Multi-pitch · T roof",
+      "passed": true,
+      "renderedArea": 247.313839,
+      "changedPixels": true
+    },
+    {
+      "name": "Parametric Gable roof",
+      "passed": true,
+      "renderedArea": 225.918279,
+      "changedPixels": true
+    },
+    {
+      "name": "Building wall height changes model",
+      "passed": true,
+      "renderedArea": 225.918279,
+      "changedPixels": true
+    },
+    {
+      "name": "Material system venecja",
+      "passed": true,
+      "renderedArea": 225.918279,
+      "changedPixels": true
+    },
+    {
+      "name": "Material system t18",
+      "passed": true,
+      "renderedArea": 225.918279,
+      "changedPixels": true
+    },
+    {
+      "name": "Material system titania",
+      "passed": true,
+      "renderedArea": 225.918279,
+      "changedPixels": true
+    },
+    {
+      "name": "Material system celtycka",
+      "passed": true,
+      "renderedArea": 225.918279,
+      "changedPixels": true
+    },
+    {
+      "name": "Material system superglass",
+      "passed": true,
+      "renderedArea": 225.918279,
+      "changedPixels": true
+    },
+    {
+      "name": "Material system classic-design",
+      "passed": true,
+      "renderedArea": 225.918279,
+      "changedPixels": true
+    },
+    {
+      "name": "Roof colour changes actual material",
+      "passed": true,
+      "renderedArea": 225.918279,
+      "changedPixels": true
+    },
+    {
+      "name": "Material finish changes actual lighting response",
+      "passed": true,
+      "renderedArea": 225.918279,
+      "changedPixels": true
+    },
+    {
+      "name": "Skylights create roof penetrations and update estimate",
+      "passed": true,
+      "renderedArea": 225.918279,
+      "changedPixels": true
+    },
+    {
+      "name": "Chimney creates a measurable roof penetration",
+      "passed": true,
+      "renderedArea": 225.918279,
+      "changedPixels": true
+    },
+    {
+      "name": "Rafter spacing changes supporting geometry",
+      "passed": true,
+      "renderedArea": 225.918279,
+      "changedPixels": true
+    },
+    {
+      "name": "Top view",
+      "passed": true,
+      "renderedArea": 225.918279,
+      "changedPixels": true
+    },
+    {
+      "name": "Front view",
+      "passed": true,
+      "renderedArea": 225.918279,
+      "changedPixels": true
+    },
+    {
+      "name": "Isometric view",
+      "passed": true,
+      "renderedArea": 225.918279,
+      "changedPixels": true
+    },
+    {
+      "name": "Rotate view",
+      "passed": true,
+      "renderedArea": 225.918279,
+      "changedPixels": true
+    },
+    {
+      "name": "Zoom in",
+      "passed": true,
+      "renderedArea": 225.918279,
+      "changedPixels": true
+    },
+    {
+      "name": "Zoom out",
+      "passed": true,
+      "renderedArea": 225.918279,
+      "changedPixels": true
+    },
+    {
+      "name": "Reset camera",
+      "passed": true,
+      "renderedArea": 225.918279,
+      "changedPixels": true
+    },
+    {
+      "name": "Actual dimension overlay",
+      "passed": true,
+      "renderedArea": 225.918279,
+      "changedPixels": true
+    },
+    {
+      "name": "Exploded roof layers",
+      "passed": true,
+      "renderedArea": 225.918279,
+      "changedPixels": true
+    },
+    {
+      "name": "Keyboard roof-layer navigation",
+      "passed": true
+    },
+    {
+      "name": "Model full-screen view",
+      "passed": true,
+      "renderedArea": 225.918279,
+      "changedPixels": true
+    },
+    {
+      "name": "Exit model full screen",
+      "passed": true
+    },
+    {
+      "name": "Itemized unit-price override updates totals, geometry unchanged",
+      "passed": true
+    },
+    {
+      "name": "Real English PDF download",
+      "passed": true
+    },
+    {
+      "name": "Real JSON configuration download",
+      "passed": true
+    },
+    {
+      "name": "Import saved roof configuration",
+      "passed": true
+    },
+    {
+      "name": "Polish PDF download with persisted configuration",
+      "passed": true
+    },
+    {
+      "name": "Project 1: real before/after images and keyboard slider",
+      "passed": true
+    },
+    {
+      "name": "Project 2: real before/after images and keyboard slider",
+      "passed": true
+    },
+    {
+      "name": "Project 3: real before/after images and keyboard slider",
+      "passed": true
+    },
+    {
+      "name": "Project 4: real before/after images and keyboard slider",
+      "passed": true
+    },
+    {
+      "name": "Project 5: real before/after images and keyboard slider",
+      "passed": true
+    },
+    {
+      "name": "Project 6: real before/after images and keyboard slider",
+      "passed": true
+    },
+    {
+      "name": "Project 7: real before/after images and keyboard slider",
+      "passed": true
+    },
+    {
+      "name": "Project 8: real before/after images and keyboard slider",
+      "passed": true
+    },
+    {
+      "name": "Project 9: real before/after images and keyboard slider",
+      "passed": true
+    },
+    {
+      "name": "Project 10: real before/after images and keyboard slider",
+      "passed": true
+    },
+    {
+      "name": "Mouse-drag photographic comparison",
+      "passed": true
+    },
+    {
+      "name": "Full-screen case-study navigation and Escape",
+      "passed": true
+    },
+    {
+      "name": "Side-by-side material comparison with 3D models and current roof totals",
+      "passed": true
+    },
+    {
+      "name": "Contact form validation",
+      "passed": true
+    },
+    {
+      "name": "Real local inquiry document, no simulated network submission",
+      "passed": true
+    },
+    {
+      "name": "Localized static page /pl/",
+      "passed": true
+    },
+    {
+      "name": "Localized static page /pl/podejscie/",
+      "passed": true
+    },
+    {
+      "name": "Localized static page /pl/realizacje/",
+      "passed": true
+    },
+    {
+      "name": "Localized static page /pl/materialy/",
+      "passed": true
+    },
+    {
+      "name": "Localized static page /pl/studio/",
+      "passed": true
+    },
+    {
+      "name": "Localized static page /pl/kosztorys/",
+      "passed": true
+    },
+    {
+      "name": "Localized static page /pl/kontakt/",
+      "passed": true
+    },
+    {
+      "name": "Localized static page /pl/prywatnosc/",
+      "passed": true
+    },
+    {
+      "name": "Localized static page /pl/realizacje/nowy-rozdzial/",
+      "passed": true
+    },
+    {
+      "name": "Localized static page /pl/realizacje/antracytowa-linia/",
+      "passed": true
+    },
+    {
+      "name": "Localized static page /pl/realizacje/cieplo-brazu/",
+      "passed": true
+    },
+    {
+      "name": "Localized static page /pl/realizacje/przywrocona-forma/",
+      "passed": true
+    },
+    {
+      "name": "Localized static page /pl/realizacje/mala-bryla-duza-zmiana/",
+      "passed": true
+    },
+    {
+      "name": "Localized static page /pl/realizacje/swiatlo-pod-dachem/",
+      "passed": true
+    },
+    {
+      "name": "Localized static page /pl/realizacje/miejski-rytm/",
+      "passed": true
+    },
+    {
+      "name": "Localized static page /pl/realizacje/czekoladowy-horyzont/",
+      "passed": true
+    },
+    {
+      "name": "Localized static page /pl/realizacje/szacunek-do-detalu/",
+      "passed": true
+    },
+    {
+      "name": "Localized static page /pl/realizacje/wieksza-perspektywa/",
+      "passed": true
+    },
+    {
+      "name": "Localized static page /en/",
+      "passed": true
+    },
+    {
+      "name": "Localized static page /en/approach/",
+      "passed": true
+    },
+    {
+      "name": "Localized static page /en/projects/",
+      "passed": true
+    },
+    {
+      "name": "Localized static page /en/materials/",
+      "passed": true
+    },
+    {
+      "name": "Localized static page /en/studio/",
+      "passed": true
+    },
+    {
+      "name": "Localized static page /en/estimate/",
+      "passed": true
+    },
+    {
+      "name": "Localized static page /en/contact/",
+      "passed": true
+    },
+    {
+      "name": "Localized static page /en/privacy/",
+      "passed": true
+    },
+    {
+      "name": "Localized static page /en/projects/nowy-rozdzial/",
+      "passed": true
+    },
+    {
+      "name": "Localized static page /en/projects/antracytowa-linia/",
+      "passed": true
+    },
+    {
+      "name": "Localized static page /en/projects/cieplo-brazu/",
+      "passed": true
+    },
+    {
+      "name": "Localized static page /en/projects/przywrocona-forma/",
+      "passed": true
+    },
+    {
+      "name": "Localized static page /en/projects/mala-bryla-duza-zmiana/",
+      "passed": true
+    },
+    {
+      "name": "Localized static page /en/projects/swiatlo-pod-dachem/",
+      "passed": true
+    },
+    {
+      "name": "Localized static page /en/projects/miejski-rytm/",
+      "passed": true
+    },
+    {
+      "name": "Localized static page /en/projects/czekoladowy-horyzont/",
+      "passed": true
+    },
+    {
+      "name": "Localized static page /en/projects/szacunek-do-detalu/",
+      "passed": true
+    },
+    {
+      "name": "Localized static page /en/projects/wieksza-perspektywa/",
+      "passed": true
+    },
+    {
+      "name": "WCAG A/AA automated rules /pl/",
+      "passed": true
+    },
+    {
+      "name": "WCAG A/AA automated rules /pl/studio/",
+      "passed": true
+    },
+    {
+      "name": "WCAG A/AA automated rules /pl/realizacje/",
+      "passed": true
+    },
+    {
+      "name": "WCAG A/AA automated rules /pl/kontakt/",
+      "passed": true
+    },
+    {
+      "name": "WCAG A/AA automated rules /en/materials/",
+      "passed": true
+    },
+    {
+      "name": "Responsive layout 320px /pl/",
+      "passed": true
+    },
+    {
+      "name": "Responsive layout 320px /pl/studio/",
+      "passed": true
+    },
+    {
+      "name": "Responsive layout 320px /pl/realizacje/",
+      "passed": true
+    },
+    {
+      "name": "Responsive layout 320px /pl/kontakt/",
+      "passed": true
+    },
+    {
+      "name": "Responsive layout 320px /en/materials/",
+      "passed": true
+    },
+    {
+      "name": "Responsive layout 390px /pl/",
+      "passed": true
+    },
+    {
+      "name": "Responsive layout 390px /pl/studio/",
+      "passed": true
+    },
+    {
+      "name": "Responsive layout 390px /pl/realizacje/",
+      "passed": true
+    },
+    {
+      "name": "Responsive layout 390px /pl/kontakt/",
+      "passed": true
+    },
+    {
+      "name": "Responsive layout 390px /en/materials/",
+      "passed": true
+    },
+    {
+      "name": "Responsive layout 768px /pl/",
+      "passed": true
+    },
+    {
+      "name": "Responsive layout 768px /pl/studio/",
+      "passed": true
+    },
+    {
+      "name": "Responsive layout 768px /pl/realizacje/",
+      "passed": true
+    },
+    {
+      "name": "Responsive layout 768px /pl/kontakt/",
+      "passed": true
+    },
+    {
+      "name": "Responsive layout 768px /en/materials/",
+      "passed": true
+    },
+    {
+      "name": "Responsive layout 1024px /pl/",
+      "passed": true
+    },
+    {
+      "name": "Responsive layout 1024px /pl/studio/",
+      "passed": true
+    },
+    {
+      "name": "Responsive layout 1024px /pl/realizacje/",
+      "passed": true
+    },
+    {
+      "name": "Responsive layout 1024px /pl/kontakt/",
+      "passed": true
+    },
+    {
+      "name": "Responsive layout 1024px /en/materials/",
+      "passed": true
+    },
+    {
+      "name": "Responsive layout 1920px /pl/",
+      "passed": true
+    },
+    {
+      "name": "Responsive layout 1920px /pl/studio/",
+      "passed": true
+    },
+    {
+      "name": "Responsive layout 1920px /pl/realizacje/",
+      "passed": true
+    },
+    {
+      "name": "Responsive layout 1920px /pl/kontakt/",
+      "passed": true
+    },
+    {
+      "name": "Responsive layout 1920px /en/materials/",
+      "passed": true
+    },
+    {
+      "name": "Mobile accessible menu and Escape",
+      "passed": true
+    },
+    {
+      "name": "Forced WebGL failure: real 2D geometry and calculator remain usable",
+      "passed": true
+    }
+  ],
+  "errors": [],
+  "failedRequests": []
+}

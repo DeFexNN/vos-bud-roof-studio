@@ -13,6 +13,8 @@
     "test:browser": "node scripts/qa.mjs",
     "test:a11y": "node scripts/qa-accessibility.mjs",
     "test:extended": "node scripts/qa-extended.mjs",
+    "docs:screenshots": "node scripts/capture-docs.mjs",
+    "docs:check": "node scripts/check-docs.mjs",
     "assets": "node scripts/prepare-assets.mjs"
   },
   "dependencies": {

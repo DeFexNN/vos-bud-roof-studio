@@ -4,6 +4,12 @@ out/
 *.tsbuildinfo
 .env*
 !.env.example
-/README.md
-/docs/
+/docs/*
+!/docs/README.md
+!/docs/CALCULATIONS.md
+!/docs/PRICING.md
+!/docs/DEPLOYMENT.md
+!/docs/QA.md
+!/docs/assets/
+!/docs/verification/
 /qa/

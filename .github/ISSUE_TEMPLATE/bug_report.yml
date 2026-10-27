@@ -1,0 +1,61 @@
+name: Bug report
+description: Report a reproducible issue in the site, 3D studio or estimator.
+title: "[Bug]: "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for the report. Use synthetic data and remove personal details or private price overrides from shared configurations.
+        For vulnerabilities, use [private security reporting](https://github.com/DeFexNN/vos-bud-roof-studio/security/advisories/new), not this form.
+  - type: dropdown
+    id: area
+    attributes:
+      label: Affected area
+      options:
+        - 3D roof studio
+        - Quantities, pricing or VAT
+        - Portfolio and photographs
+        - PDF or configuration export
+        - Accessibility or mobile layout
+        - PL/EN content
+        - Build or deployment
+        - Documentation
+    validations:
+      required: true
+  - type: input
+    id: route
+    attributes:
+      label: Page URL or route
+      placeholder: /en/studio/
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to reproduce
+      description: Include relevant dimensions, material and settings. Attach only sanitized configuration files.
+      placeholder: |
+        1. Open…
+        2. Change…
+        3. Observe…
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected and actual behavior
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Browser and device
+      placeholder: Chrome version, OS, viewport width; note whether WebGL is available
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Screenshots or diagnostic details
+      description: Remove personal data, credentials and unrelated console output.

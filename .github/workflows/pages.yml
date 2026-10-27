@@ -30,6 +30,7 @@ jobs:
         id: pages
         uses: actions/configure-pages@v5
       - run: npm ci
+      - run: npm run docs:check
       - run: npm test
       - name: Build static site
         env:

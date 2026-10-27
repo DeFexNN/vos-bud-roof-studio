@@ -1,0 +1,28 @@
+name: Feature request
+description: Propose a focused improvement with a clear user benefit.
+title: "[Feature]: "
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem should this solve?
+      description: Describe the user and the limitation, rather than only naming a feature.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed experience
+      description: Explain the behavior, affected routes and how success could be checked.
+    validations:
+      required: true
+  - type: textarea
+    id: constraints
+    attributes:
+      label: Data, calculations or compatibility
+      description: Mention product sources, mathematical assumptions, PL/EN content, accessibility or static-hosting constraints if relevant.
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
