@@ -38,13 +38,13 @@ export function Reveal({ children, className = '' }: { children: ReactNode; clas
   }, []);
   return <div className={`reveal ${className}`} ref={ref}>{children}</div>;
 }
-export function ProjectPhoto({ number, phase = 'after', alt, position = 'center', className = '', priority = false, sizes = '(max-width: 700px) 100vw, 50vw' }: {
-  number: string; phase?: 'before' | 'after' | 'collage'; alt: string; position?: string; className?: string; priority?: boolean; sizes?: string;
+export function ProjectPhoto({ number, phase = 'after', alt, position = 'center', zoom = 1, className = '', priority = false, sizes = '(max-width: 700px) 100vw, 50vw' }: {
+  number: string; phase?: 'before' | 'after' | 'collage'; alt: string; position?: string; zoom?: number; className?: string; priority?: boolean; sizes?: string;
 }) {
   const dimensions = imageMetadata[`${number}-${phase}` as keyof typeof imageMetadata] || { width: 1600, height: 1600 };
   return <img className={`project-image ${className}`} src={projectImage(number, phase)}
     srcSet={`${projectImage(number, phase, 480)} 480w, ${projectImage(number, phase, 960)} 960w, ${projectImage(number, phase, 1600)} ${Math.min(dimensions.width, 1600)}w`}
-    sizes={sizes} alt={alt} style={{ objectPosition: position }} loading={priority ? 'eager' : 'lazy'} decoding="async" fetchPriority={priority ? 'high' : 'auto'} width={dimensions.width} height={dimensions.height} />;
+    sizes={sizes} alt={alt} style={{ objectPosition: position, ...(zoom !== 1 ? { transform: `scale(${zoom})`, transformOrigin: position } : {}) }} loading={priority ? 'eager' : 'lazy'} decoding="async" fetchPriority={priority ? 'high' : 'auto'} width={dimensions.width} height={dimensions.height} />;
 }
 export function Numeric({ label, value, onChange, min, max, step = 1, unit = 'm', id: givenId, disabled = false }: {
   label: string; value: number; onChange: (n: number) => void; min: number; max: number; step?: number; unit?: string; id?: string; disabled?: boolean;

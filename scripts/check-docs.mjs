@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 
 const files = [
   'README.md', 'CONTRIBUTING.md', 'SECURITY.md', '.github/pull_request_template.md',
-  'docs/README.md', 'docs/CALCULATIONS.md', 'docs/PRICING.md', 'docs/DEPLOYMENT.md', 'docs/QA.md',
+  'docs/README.md', 'docs/CALCULATIONS.md', 'docs/PRICING.md', 'docs/DEPLOYMENT.md', 'docs/QA.md', 'docs/PHOTOGRAPHY.md', 'docs/REDESIGN.md',
 ];
 const texts = new Map(), failures = [];
 let checkedLinks = 0;

@@ -92,11 +92,11 @@ export function plasterMaterial() {
 export function glassMaterial() {
   const map = canvasTexture(256, (ctx, s) => {
     const gradient = ctx.createLinearGradient(0, 0, 65, s);
-    gradient.addColorStop(0, '#274044'); gradient.addColorStop(.42, '#708e87'); gradient.addColorStop(.46, '#a6b9ac'); gradient.addColorStop(1, '#20352e');
+    gradient.addColorStop(0, '#303638'); gradient.addColorStop(.42, '#7f8584'); gradient.addColorStop(.46, '#b8b4aa'); gradient.addColorStop(1, '#292a29');
     ctx.fillStyle = gradient; ctx.fillRect(0, 0, s, s);
     ctx.fillStyle = '#dfd5ad30'; ctx.fillRect(s * .15, s * .3, s * .55, s * .7);
     ctx.fillStyle = '#fff8dd18';
     for (let x = 40; x < 170; x += 5) ctx.fillRect(x, 100, 2, s);
   });
-  return new THREE.MeshStandardMaterial({ color: '#bac5ad', map, metalness: .68, roughness: .17, envMapIntensity: 1.5, emissive: '#4b3722', emissiveIntensity: .14, side: THREE.DoubleSide });
+  return new THREE.MeshStandardMaterial({ color: '#c8c3b8', map, metalness: .68, roughness: .17, envMapIntensity: 1.5, emissive: '#4b3722', emissiveIntensity: .14, side: THREE.DoubleSide });
 }

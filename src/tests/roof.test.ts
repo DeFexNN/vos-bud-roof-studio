@@ -224,3 +224,8 @@ test('localization is complete, dictionary keys match and public data has no Cyr
 test('every price has a documented source, valid VAT and physical purchasing unit', () => {
   for (const p of Object.values(prices)) { assert.ok(sources.some(s => s.id === p.sourceId)); assert.ok(p.sourceURL.startsWith('https://')); assert.ok(p.unitPricePLN >= 0); }
 });
+test('reviewed photo pairs never imply alignment or an unverified before condition', () => {
+  assert.equal(projects.filter(project => project.presentation === 'sequence').length, 9);
+  assert.equal(projects.find(project => project.number === '10')?.presentation, 'views');
+  assert.equal(projects.some(project => project.presentation === 'aligned'), false);
+});

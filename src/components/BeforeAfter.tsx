@@ -15,6 +15,13 @@ export default function BeforeAfter({ project, locale, onExpand, full = false, p
     const box = root.current?.getBoundingClientRect();
     if (box) setPosition(Math.max(0, Math.min(100, Math.round((event.clientX - box.left) / box.width * 100))));
   };
+  if (project.presentation !== 'aligned') return <div className={`photo-sequence ${full ? 'photo-sequence-full' : ''}`} data-project={project.number}>
+    <div className="photo-sequence-grid">{(['before', 'after'] as const).map((phase, i) => <figure key={phase}>
+      <figcaption><span className="mono">0{i + 1}</span>{project.presentation === 'views' ? (i === 0 ? d.viewOne : d.viewTwo) : d[phase]}</figcaption>
+      <ProjectPhoto number={project.number} phase={phase} alt={phase === 'before' ? project.beforeAlt[locale] : project.afterAlt[locale]} priority={priority} sizes={full ? '50vw' : '(max-width: 700px) 45vw, 30vw'} />
+    </figure>)}</div>
+    <div className="photo-sequence-footer"><span>{project.presentation === 'views' ? d.photoViews : d.photoSequence}</span>{onExpand && <button className="comparison-expand" onClick={onExpand} aria-label={`${d.fullPhoto}: ${project.title[locale]}`}><span>{d.fullPhoto}</span><Maximize2 size={18} /></button>}</div>
+  </div>;
   return <div className={`comparison ${full ? 'comparison-full' : ''}`} ref={root} data-position={position}>
     <div className="comparison-image"><ProjectPhoto number={project.number} alt={project.afterAlt[locale]} position={project.position} priority={priority} sizes={full ? '100vw' : undefined} /></div>
     <div className="comparison-image before-image" style={{ clipPath: `inset(0 ${100 - position}% 0 0)` }}><ProjectPhoto number={project.number} phase="before" alt={project.beforeAlt[locale]} position={project.position} priority={priority} sizes={full ? '100vw' : undefined} /></div>

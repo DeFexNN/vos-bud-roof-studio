@@ -51,7 +51,7 @@ try {
     await verifyChange(`Parametric ${name} roof`, () => page.getByRole('button', { name, exact: true }).click());
     assert.equal(Number(await canvas().getAttribute('data-planes')), planes);
   }
-  await page.locator('#estimate-mode').selectOption('detailed');
+  await page.locator('.control-panel summary').filter({ hasText: 'Advanced dimensions' }).click();
   await verifyChange('Building wall height changes model', () => page.locator('#roof-height').fill('4.5'));
   await page.getByRole('tab', { name: 'Covering & colour', exact: true }).click();
   for (const id of ['venecja', 't18', 'titania', 'celtycka', 'superglass', 'classic-design']) await verifyChange(`Material system ${id}`, () => page.locator('#roof-product').selectOption(id));
@@ -62,7 +62,7 @@ try {
   await verifyChange('Chimney creates a measurable roof penetration', () => page.locator('#roof-chimneys').fill('1'));
   await page.locator('.viewer-topline').getByRole('button', { name: 'Separate roof layers', exact: true }).click();
   await page.getByRole('tab', { name: 'Covering & colour', exact: true }).click();
-  await page.locator('.control-panel details.accordion > summary').filter({ hasText: 'Product documentation' }).click();
+  await page.locator('.control-panel details.accordion > summary').filter({ hasText: 'Technical settings' }).click();
   previousHash = await hash();
   await verifyChange('Rafter spacing changes supporting geometry', () => page.locator('#roof-rafterSpacing').fill('0.6'));
   await page.locator('.viewer-topline').getByRole('button', { name: 'Assemble roof', exact: true }).click();
@@ -108,21 +108,29 @@ try {
   await page.locator('.estimate-sidebar').getByRole('button', { name: 'Przywróć ustawienia', exact: true }).click();
 
   await goto('/pl/realizacje/');
-  assert.equal(await page.locator('.comparison-input').count(), 10);
+  assert.equal(await page.locator('.comparison-input').count(), 0, 'No supplied pair is aligned closely enough for an overlay');
+  assert.equal(await page.locator('.portfolio-grid article').count(), 10);
   for (let i = 0; i < 10; i++) {
-    const comparison = page.locator('.comparison').nth(i), input = comparison.locator('input'); await comparison.scrollIntoViewIfNeeded();
-    await input.fill('0'); const a = createHash('sha256').update(await comparison.screenshot()).digest('hex');
-    await input.fill('100'); const b = createHash('sha256').update(await comparison.screenshot()).digest('hex'); assert.notEqual(a, b);
-    await input.focus(); await page.keyboard.press('ArrowLeft'); assert.equal(await input.inputValue(), '99');
-    await input.fill('50'); record(`Project ${i + 1}: real before/after images and keyboard slider`);
+    await page.locator('.project-evidence > summary').nth(i).click();
+    const sequence = page.locator('.photo-sequence').nth(i); await sequence.scrollIntoViewIfNeeded();
+    const projectNumber = Number(await sequence.getAttribute('data-project'));
+    const images = sequence.locator('img'); assert.equal(await images.count(), 2);
+    await images.evaluateAll(images => Promise.all(images.map(image => image.decode())));
+    const sources = await images.evaluateAll(images => images.map(image => ({ src: image.currentSrc, fit: getComputedStyle(image).objectFit, loaded: image.naturalWidth > 0 })));
+    assert.notEqual(sources[0].src, sources[1].src);
+    assert.ok(sources.every(image => image.loaded && image.fit === 'contain'));
+    const captions = await sequence.locator('figcaption').allTextContents();
+    assert.ok(captions[0].includes(projectNumber === 10 ? 'Widok od frontu' : 'Przed'));
+    assert.ok(captions[1].includes(projectNumber === 10 ? 'Widok z boku' : 'Po'));
+    record(`Project ${projectNumber}: separate genuine views, explicit labels and uncropped photographs`);
   }
-  const first = page.locator('.comparison-input').first(); await first.scrollIntoViewIfNeeded();
-  const box = await first.boundingBox();
-  await page.mouse.move(box.x + box.width * .2, box.y + box.height / 2); await page.mouse.down(); await page.mouse.move(box.x + box.width * .76, box.y + box.height / 2, { steps: 6 }); await page.mouse.up();
-  assert.ok(Number(await first.inputValue()) > 65); record('Mouse-drag photographic comparison');
-  await page.locator('.comparison-expand').first().click(); await page.locator('dialog.project-lightbox').waitFor({ state: 'visible' });
+  await page.locator('.portfolio-filter > button', { hasText: 'Odbudowa' }).click();
+  assert.equal(await page.locator('.portfolio-grid article').count(), 2);
+  await page.locator('.portfolio-filter button').first().click();
+  assert.equal(await page.locator('.portfolio-grid article').count(), 10); record('Portfolio category filters preserve all ten case studies');
+  await page.locator('.project-preview').first().focus(); await page.keyboard.press('Enter'); await page.locator('dialog.project-lightbox').waitFor({ state: 'visible' });
   await page.getByRole('button', { name: 'Następna realizacja', exact: true }).click();
-  await page.locator('.lightbox-bottom h2').filter({ hasText: 'Antracytowa' }).waitFor();
+  await page.locator('.lightbox-bottom h2').filter({ hasText: 'Brązowy dach' }).waitFor();
   await page.keyboard.press('Escape'); await page.locator('.project-lightbox').waitFor({ state: 'detached' }); record('Full-screen case-study navigation and Escape');
 
   await goto('/en/materials/'); await drawn();

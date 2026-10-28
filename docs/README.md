@@ -11,6 +11,8 @@
 | Understand how quantities and totals are calculated | [Calculation model](CALCULATIONS.md) |
 | Check a price, VAT assumption or publication date | [Pricing and evidence](PRICING.md) |
 | See what was actually tested | [Verification report](QA.md) |
+| Understand the loft redesign | [Design decisions](REDESIGN.md) |
+| Find missing project photo requirements | [Photography review](PHOTOGRAPHY.md) |
 | Propose a change or fix a bug | [Contributing](../CONTRIBUTING.md) |
 | Report a security vulnerability | [Security policy](../SECURITY.md) |
 
@@ -26,5 +28,5 @@ The estimator is for planning. It does not replace a measured survey, engineered
 ## Evidence and media
 
 - [`verification/`](verification/) contains curated machine-readable result snapshots. Their dates and target environments are described in [QA.md](QA.md).
-- [`assets/`](assets/) contains optimized screenshots captured from the live application. Regenerate them with `npm run docs:screenshots`; set `DOCS_URL` to capture another deployment.
+- [`assets/`](assets/) contains optimized application screenshots. The loft-redesign previews were captured from the local production export. Regenerate them with `npm run docs:screenshots`; set `DOCS_URL` to select the intended deployment (the default is the public site).
 - Original photo audits, internal reference notes and generated local `qa/` downloads are intentionally not part of the public documentation.

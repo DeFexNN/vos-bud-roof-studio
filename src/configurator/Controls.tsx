@@ -1,15 +1,13 @@
 'use client';
 
-import { Check, ChevronDown, Info, RotateCcw } from 'lucide-react';
-import { useState } from 'react';
+import { Check, ChevronDown, Info } from 'lucide-react';
 import type { Locale } from '@/i18n/types';
 import { messages } from '@/i18n/messages';
 import { colors, productById, productName, products, systemNames } from '@/data/materials';
 import { numericLimits, roofTypes, type RoofConfig } from './model';
 import { useRoof } from './State';
-import { FieldSelect, Numeric, Toggle } from '@/components/ui';
+import { Accordion, FieldSelect, Numeric, Toggle } from '@/components/ui';
 
-export type EstimateMode = 'quick' | 'detailed' | 'professional';
 export function RoofTypeIcon({ type }: { type: string }) {
   const paths: Record<string, string> = {
     mono: 'M4 21V13L21 7L31 13V25L14 31L4 26M4 13L14 18L31 13M14 18V31',
@@ -23,7 +21,7 @@ export function ShapeSelector({ locale }: { locale: Locale }) {
   const { config, update } = useRoof(), d = messages[locale];
   return <fieldset className="shape-selector"><legend>{d.roofType}</legend><div>{roofTypes.map(type => <button key={type} className={config.type === type ? 'active' : ''} onClick={() => update({ type, ridgeLength: null })} aria-pressed={config.type === type}>
     <RoofTypeIcon type={type} /><span>{d.roofNames[type]}</span>{config.type === type && <i />}
-  </button>)}</div></fieldset>;
+  </button>)}</div><p className="shape-description" aria-live="polite">{d.shapeDescriptions[config.type]}</p></fieldset>;
 }
 export function AppearanceControls({ locale }: { locale: Locale }) {
   const { config, update, selectProduct } = useRoof(), d = messages[locale], product = productById(config.productId)!;
@@ -37,7 +35,7 @@ export function AppearanceControls({ locale }: { locale: Locale }) {
   </>;
 }
 
-export function GeometryControls({ locale, mode = 'detailed' }: { locale: Locale; mode?: EstimateMode }) {
+export function GeometryControls({ locale }: { locale: Locale }) {
   const { config, update } = useRoof(), d = messages[locale];
   const numeric = (key: keyof typeof numericLimits, label: string, unit = 'm', step = .1) => {
     const [min, max] = numericLimits[key];
@@ -45,10 +43,11 @@ export function GeometryControls({ locale, mode = 'detailed' }: { locale: Locale
   };
   return <><ShapeSelector locale={locale} /><div className="dimension-grid">
     {numeric('length', d.length)}{numeric('width', d.width)}{numeric('pitch', d.pitch, '°', 1)}{numeric('overhang', d.overhang, 'm', .05)}
-    {mode !== 'quick' && numeric('height', d.height)}
   </div>
-    {config.type === 'hip' && <div className="ridge-field"><Toggle label={d.automatic + ' · ' + d.ridgeLength} checked={config.ridgeLength === null} onChange={auto => update({ ridgeLength: auto ? null : Math.abs(config.length - config.width) })} />{config.ridgeLength !== null && <Numeric id="roof-ridgeLength" label={d.ridgeLength} value={config.ridgeLength} min={0} max={Math.max(config.length, config.width) + config.overhang * 2 - .2} step={.1} onChange={v => update({ ridgeLength: v })} />}<p className="small-note">{d.ridgeNote}</p></div>}
     {config.type === 'multi' && <div className="dimension-grid">{numeric('wingWidth', d.wingWidth)}{numeric('wingLength', d.wingLength)}</div>}
+    <Accordion title={d.advancedGeometry}><p className="small-note">{d.advancedHelp}</p><div className="dimension-grid">{numeric('height', d.height)}</div>
+      {config.type === 'hip' && <div className="ridge-field"><Toggle label={d.automatic + ' · ' + d.ridgeLength} checked={config.ridgeLength === null} onChange={auto => update({ ridgeLength: auto ? null : Math.abs(config.length - config.width) })} />{config.ridgeLength !== null && <Numeric id="roof-ridgeLength" label={d.ridgeLength} value={config.ridgeLength} min={0} max={Math.max(config.length, config.width) + config.overhang * 2 - .2} step={.1} onChange={v => update({ ridgeLength: v })} />}<p className="small-note">{d.ridgeNote}</p></div>}
+    </Accordion>
   </>;
 }
 

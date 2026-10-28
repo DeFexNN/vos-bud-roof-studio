@@ -74,7 +74,7 @@ export default function RoofScene({ config, geometry, locale, hero = false, expl
     const mobile = window.innerWidth < 700, reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, mobile ? 1.25 : 1.65));
     renderer.outputColorSpace = THREE.SRGBColorSpace; renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.1;
-    renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    renderer.shadowMap.enabled = true; renderer.shadowMap.type = hero ? THREE.PCFShadowMap : THREE.PCFSoftShadowMap;
     renderer.domElement.setAttribute('aria-label', messages[locale].sceneLabel); renderer.domElement.setAttribute('role', 'img');
     renderer.domElement.dataset.scene = hero ? 'hero' : 'studio';
     host.appendChild(renderer.domElement);
@@ -82,6 +82,9 @@ export default function RoofScene({ config, geometry, locale, hero = false, expl
     if (mobile) environment.directional.shadow.mapSize.set(1024, 1024);
     const camera = new THREE.PerspectiveCamera(hero ? 29 : 34, 1, .1, 450);
     const orbit = new OrbitControls(camera, renderer.domElement);
+    // OrbitControls.connect() writes `none` inline. Keep native vertical page
+    // scrolling and pinch zoom; horizontal drags still rotate the model.
+    renderer.domElement.style.touchAction = 'pan-y pinch-zoom';
     orbit.enableDamping = true; orbit.dampingFactor = .085; orbit.enablePan = false;
     orbit.enableZoom = !hero; orbit.minPolarAngle = .025; orbit.maxPolarAngle = Math.PI / 2.03;
     orbit.zoomSpeed = .7; orbit.rotateSpeed = .7; orbit.mouseButtons = { LEFT: THREE.MOUSE.ROTATE, MIDDLE: THREE.MOUSE.DOLLY, RIGHT: THREE.MOUSE.ROTATE };
@@ -94,10 +97,11 @@ export default function RoofScene({ config, geometry, locale, hero = false, expl
     const targetFor = (g: RoofGeometry) => new THREE.Vector3(0, g.maxHeight * .38, latest.current.config.type === 'multi' ? latest.current.config.wingLength * .12 : 0);
     const viewFor = (g: RoofGeometry, view = 'iso') => {
       const size = Math.max(g.bounds.x, g.bounds.z, g.maxHeight * 1.7), target = targetFor(g);
-      const factor = hero ? mobile ? 3.4 : 1.8 : 1.48;
+      const aspect = host.clientWidth / Math.max(1, host.clientHeight);
+      const factor = (hero ? 1.63 : 1.48) * Math.max(1, 1.3 / aspect);
       if (view === 'top') return { position: target.clone().add(new THREE.Vector3(.001, size * factor * 1.1, .001)), target };
       if (view === 'front') return { position: target.clone().add(new THREE.Vector3(size * factor * 1.5, size * .12, 0)), target };
-      return { position: target.clone().add(new THREE.Vector3(size * factor * .88, size * factor * .58, size * factor)), target };
+      return { position: target.clone().add(new THREE.Vector3(size * factor * (hero ? .82 : .88), size * factor * (hero ? .68 : .58), size * factor)), target };
     };
     let currentGeometry = latest.current.geometry;
     const cameraTo = (view: string, immediate = false) => {
@@ -174,14 +178,18 @@ export default function RoofScene({ config, geometry, locale, hero = false, expl
       if (cmd === 'in' || cmd === 'out') relative.multiplyScalar(cmd === 'in' ? .86 : 1.16).clampLength(orbit.minDistance, orbit.maxDistance);
       camera.position.copy(relative.add(orbit.target)); s.dirty = true; s.request();
     };
+    let previousFit = Math.max(1, 1.3 / (host.clientWidth / Math.max(1, host.clientHeight)));
     const resize = new ResizeObserver(() => {
       if (!host.clientWidth || !host.clientHeight) return;
       renderer.setSize(host.clientWidth, host.clientHeight);
       camera.aspect = host.clientWidth / host.clientHeight;
-      if (hero) {
-        const mobileNow = window.innerWidth < 761;
-        camera.setViewOffset(host.clientWidth, host.clientHeight, mobileNow ? 0 : -host.clientWidth * .105, mobileNow ? -host.clientHeight * .21 : 0, host.clientWidth, host.clientHeight);
+      // Keep the full house on narrow canvases without changing the viewing angle.
+      const fit = Math.max(1, 1.3 / camera.aspect);
+      if (Math.abs(fit - previousFit) > .001) {
+        s.cameraTween = null;
+        camera.position.sub(orbit.target).multiplyScalar(fit / previousFit).add(orbit.target);
       }
+      previousFit = fit;
       camera.updateProjectionMatrix();
       s.dirty = true; s.request();
     }); resize.observe(host);
@@ -250,10 +258,10 @@ export default function RoofScene({ config, geometry, locale, hero = false, expl
     <div ref={mount} className={`scene-canvas ${fallback ? 'is-fallback' : ''}`} />
     {!ready && !fallback && <div className="scene-loading"><Box size={25} strokeWidth={1} /><span>{d.loading3d}</span><i /></div>}
     {fallback && <div className="scene-fallback"><RoofFallback config={config} geometry={geometry} /><p>{d.fallback}</p></div>}
-    {controls && !fallback && <div className="scene-toolbar" aria-label={d.sceneLabel}>
+    {controls && !fallback && (hero ? <div className="scene-toolbar hero-scene-tools"><span>{d.heroDrag}</span><div><button onClick={() => command('rotate')} aria-label={d.rotate} title={d.rotate}><Rotate3D size={19} /></button><button onClick={() => command('iso')} aria-label={d.resetView} title={d.resetView}><RotateCcw size={18} /></button></div></div> : <div className="scene-toolbar" aria-label={d.sceneLabel}>
       <div className="camera-views"><button onClick={() => command('iso')} aria-label={d.isometric} title={d.isometric}><Box size={18} /></button><button onClick={() => command('top')} aria-label={d.topView} title={d.topView}><ArrowDownToLine size={18} /></button><button onClick={() => command('front')} aria-label={d.frontView} title={d.frontView}><Eye size={18} /></button></div>
       <div><button onClick={() => command('rotate')} aria-label={d.rotate} title={d.rotate}><Rotate3D size={19} /></button><button onClick={() => command('in')} aria-label={d.zoomIn} title={d.zoomIn}><Plus size={20} /></button><button onClick={() => command('out')} aria-label={d.zoomOut} title={d.zoomOut}><Minus size={20} /></button><button onClick={() => command('iso')} aria-label={d.resetView} title={d.resetView}><RotateCcw size={17} /></button><button onClick={() => setFull(!full)} aria-label={full ? d.exitFullscreen : d.fullscreen} title={d.fullscreen}>{full ? <X size={20} /> : <Maximize2 size={17} />}</button></div>
-    </div>}
+    </div>)}
     {full && <button className="fullscreen-close icon-button" onClick={() => setFull(false)} aria-label={d.exitFullscreen}><X /></button>}
   </div>;
 }

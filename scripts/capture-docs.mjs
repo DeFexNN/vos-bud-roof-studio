@@ -26,7 +26,7 @@ async function save(name, buffer) {
 }
 
 try {
-  await visit(page, '/en/'); await scene(page, 'canvas[data-scene="hero"]');
+  await visit(page, '/en/'); await scene(page, '.roof-hero canvas[data-area]');
   await save('cover', await page.screenshot());
 
   await page.locator('.anatomy-model').scrollIntoViewIfNeeded();
@@ -39,8 +39,7 @@ try {
   await save('studio', await page.screenshot());
 
   await visit(page, '/en/projects/');
-  for (const slider of await page.locator('.comparison-input').all()) await slider.fill('50');
-  await page.locator('.portfolio-grid article').nth(1).locator('img').evaluateAll(images => Promise.all(images.map(image => image.decode())));
+  await page.locator('.portfolio-grid article').nth(1).locator('.project-preview img').evaluateAll(images => Promise.all(images.map(image => image.decode())));
   await page.evaluate(() => window.scrollTo(0, 0)); await frames(page);
   await save('projects', await page.screenshot());
 
@@ -49,11 +48,12 @@ try {
   await visit(phone, '/en/'); await scene(phone);
   const home = await phone.screenshot();
   await visit(phone, '/en/studio/'); await scene(phone);
+  await phone.getByTestId('configure-jump').click(); await frames(phone);
   const studio = await phone.screenshot();
   const mask = Buffer.from('<svg xmlns="http://www.w3.org/2000/svg" width="390" height="844"><rect width="390" height="844" rx="10" fill="white"/></svg>');
   const rounded = async buffer => sharp(buffer).composite([{ input: mask, blend: 'dest-in' }]).png().toBuffer();
   const labels = Buffer.from('<svg xmlns="http://www.w3.org/2000/svg" width="864" height="944"><g fill="#c3ccb6" font-family="Arial,sans-serif" font-size="12" letter-spacing="2"><text x="28" y="37">01 / THE FIRST IMPRESSION</text><text x="446" y="37">02 / YOUR ROOF, IN YOUR HANDS</text><text x="28" y="930">V.O.S_BUD — RESPONSIVE BY DESIGN</text></g></svg>');
-  const spread = await sharp({ create: { width: 864, height: 944, channels: 4, background: '#1d2923' } }).composite([
+  const spread = await sharp({ create: { width: 864, height: 944, channels: 4, background: '#26221f' } }).composite([
     { input: labels }, { input: await rounded(home), left: 28, top: 64 }, { input: await rounded(studio), left: 446, top: 64 },
   ]).png().toBuffer();
   await save('mobile', spread);

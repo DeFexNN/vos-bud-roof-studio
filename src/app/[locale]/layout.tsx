@@ -1,10 +1,13 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { notFound } from 'next/navigation';
 import { messages } from '@/i18n/messages';
 import { RoofProvider } from '@/configurator/State';
 import { siteUrl } from '@/lib/site';
 import { fontClasses } from '@/lib/fonts';
 import '@/styles/globals.css';
+import '@/styles/loft.css';
+
+export const viewport: Viewport = { width: 'device-width', initialScale: 1, viewportFit: 'cover' };
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;

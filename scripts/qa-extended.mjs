@@ -27,7 +27,6 @@ try {
   await page.keyboard.press('Home'); await expect(page.locator('#studio-tab-geometry')).toBeFocused();
   record('Studio tabs support arrows, Home and End with roving focus');
 
-  await page.locator('#estimate-mode').selectOption('professional');
   await page.locator('.control-panel summary').filter({ hasText: 'Include installation / VAT' }).click();
   await page.locator('#roof-laborScope').selectOption('bundled');
   await page.locator('#roof-bundledLaborNet').fill('170');
@@ -54,6 +53,7 @@ try {
   await page.getByRole('button', { name: 'Tile red RAL 8004', exact: true }).click();
   await page.reload({ waitUntil: 'networkidle' });
   await expect(page.locator('#roof-length')).toHaveValue('14.6');
+  await page.locator('#studio-tab-appearance').click();
   await expect(page.locator('#roof-product')).toHaveValue('titania');
   record('Full page reload restores product, dimensions and roof configuration');
   await page.locator('.estimate-sidebar').getByRole('button', { name: 'Share your design', exact: true }).click();
@@ -63,6 +63,7 @@ try {
   const other = await clean.newPage();
   await other.goto(shared, { waitUntil: 'networkidle' });
   await expect(other.locator('#roof-length')).toHaveValue('14.6');
+  await other.locator('#studio-tab-appearance').click();
   await expect(other.locator('#roof-product')).toHaveValue('titania');
   await expect(other.getByRole('button', { name: 'Tile red RAL 8004', exact: true })).toHaveAttribute('aria-pressed', 'true');
   record('Copied share link recreates the actual roof in a clean browser context');
@@ -89,13 +90,13 @@ try {
   const touch = await browser.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 1, isMobile: true, hasTouch: true, reducedMotion: 'reduce' });
   const mobile = await touch.newPage();
   await mobile.goto(base + '/pl/realizacje/', { waitUntil: 'networkidle' });
-  const slider = mobile.locator('.comparison-input').first(); await slider.scrollIntoViewIfNeeded();
-  const bounds = await slider.boundingBox(), session = await touch.newCDPSession(mobile);
-  const point = x => [{ x: bounds.x + bounds.width * x, y: bounds.y + bounds.height * .5 }];
-  await session.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: point(.18) });
-  for (const x of [.3, .42, .54, .66, .82]) await session.send('Input.dispatchTouchEvent', { type: 'touchMove', touchPoints: point(x) });
-  await session.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
-  assert.ok(Number(await slider.inputValue()) > 75); record('Real touch-event dragging operates the photographic comparison');
+  await mobile.locator('.project-evidence > summary').first().tap();
+  const sequence = mobile.locator('.photo-sequence').first(); await sequence.scrollIntoViewIfNeeded();
+  await expect(sequence.locator('figure')).toHaveCount(2);
+  await expect(sequence.locator('figure').first()).toContainText('Przed');
+  await expect(sequence.locator('figure').last()).toContainText('Po');
+  await expect(mobile.locator('.comparison-input')).toHaveCount(0);
+  record('Mobile mismatched photographs are separately labelled, not overlaid');
   await mobile.locator('.comparison-expand').first().tap();
   await expect(mobile.locator('dialog.project-lightbox')).toBeVisible();
   await mobile.screenshot({ path: 'qa/lightbox-mobile.png' });
@@ -106,6 +107,20 @@ try {
   await mobile.waitForURL('**/pl/studio/');
   await expect(mobile.locator('dialog.mobile-menu')).toHaveCount(0);
   record('Touch fullscreen and mobile navigation open, navigate and close');
+  await mobile.getByTestId('configure-jump').tap();
+  await expect(mobile.locator('#studio-tab-geometry')).toBeFocused();
+  await expect(mobile.locator('#roof-height')).not.toBeVisible();
+  await mobile.locator('#roof-length').fill('13');
+  await mobile.getByRole('button', { name: 'Dalej: wybierz pokrycie', exact: true }).tap();
+  await expect(mobile.locator('#studio-tab-appearance')).toBeFocused();
+  await mobile.locator('#roof-product').focus();
+  await mobile.locator('#roof-product').selectOption('venecja');
+  await expect(mobile.locator('.mobile-estimate-bar')).toBeHidden();
+  await mobile.locator('#studio-tab-appearance').tap();
+  await expect(mobile.locator('.mobile-estimate-bar')).toBeVisible();
+  await mobile.locator('.mobile-estimate-bar a').tap();
+  await expect(mobile.locator('.estimate-section')).toBeInViewport();
+  record('Mobile guided shape-to-material-to-estimate journey with persistent cost bar');
 
   const cold = await browser.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 1, isMobile: true, hasTouch: true, reducedMotion: 'reduce' });
   const coldPage = await cold.newPage();

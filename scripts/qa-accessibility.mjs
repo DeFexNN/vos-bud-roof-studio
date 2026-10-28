@@ -24,6 +24,25 @@ try {
       await audit(url);
     }
   }
+  for (const locale of ['pl', 'en']) {
+    await page.goto(base + `/${locale}/`, { waitUntil: 'networkidle' });
+    await page.locator('.header-cta').hover();
+    await audit(`${locale}: solid copper Contact hover`);
+    await page.goto(base + `/${locale}/studio/`, { waitUntil: 'networkidle' });
+    await page.getByTestId('configure-jump').hover();
+    await audit(`${locale}: solid copper Configure roof hover`);
+  }
+  for (const locale of ['pl', 'en']) {
+    await page.goto(base + `/${locale}/studio/`, { waitUntil: 'networkidle' });
+    await page.locator('.control-panel details.accordion').first().evaluate(element => { element.open = true; });
+    await audit(`${locale}: advanced dimensions`);
+    await page.locator('#studio-tab-appearance').click();
+    await page.locator('.control-panel details').evaluateAll(elements => elements.forEach(element => { element.open = true; }));
+    await audit(`${locale}: materials, technical settings, openings and VAT expanded`);
+    await page.locator('#studio-tab-layers').click();
+    await audit(`${locale}: construction layers`);
+  }
+  await page.goto(base + '/en/projects/nowy-rozdzial/', { waitUntil: 'networkidle' });
   await page.locator('.comparison-expand').click();
   await page.locator('dialog.project-lightbox').waitFor({ state: 'visible' });
   await audit('fullscreen project dialog');
@@ -33,6 +52,12 @@ try {
   await page.getByRole('button', { name: 'Otwórz menu' }).click();
   await page.locator('dialog.mobile-menu').waitFor({ state: 'visible' });
   await audit('mobile navigation dialog');
+  await page.keyboard.press('Escape');
+  await page.goto(base + '/en/studio/', { waitUntil: 'networkidle' });
+  await audit('mobile studio and persistent estimate');
+  await page.goto(base + '/en/contact/', { waitUntil: 'networkidle' });
+  await page.getByRole('button', { name: 'Download your inquiry', exact: true }).click();
+  await audit('mobile inquiry validation errors');
 } finally {
   await writeFile('qa/accessibility.json', JSON.stringify({ date: new Date().toISOString(), reports }, null, 2));
   await browser.close();

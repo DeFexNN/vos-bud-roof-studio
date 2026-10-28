@@ -14,7 +14,7 @@ for locale in ("pl", "en"):
     assert path.read_bytes().startswith(b"%PDF-"), f"Invalid PDF: {path}"
     document = pymupdf.open(path)
     text = "\n".join(page.get_text() for page in document)
-    required = ("Orientacyjny kosztorys dachu", "Połacie", "Długość", "źródłowych", "Kąt") if locale == "pl" else ("Indicative roof estimate", "Gross plane area", "Building length", "Source-price range")
+    required = ("Orientacyjny kosztorys dachu", "Połacie", "Długość", "Zakres według cen źródłowych", "Kąt") if locale == "pl" else ("Indicative roof estimate", "Gross plane area", "Building length", "Range based on source prices")
     for phrase in required:
         assert phrase in text, f"Missing or malformed text {phrase!r} in {path}"
     assert "\ufffd" not in text, f"Replacement characters in {path}"

@@ -15,9 +15,9 @@
   </p>
 </div>
 
-[![V.O.S_BUD: architectural landing page with a live-rendered standing-seam roof](docs/assets/cover.webp)](https://defexnn.github.io/vos-bud-roof-studio/en/)
+[![V.O.S_BUD: architectural loft landing page with the live configurable 3D house and clear project/estimate actions](docs/assets/cover.webp)](https://defexnn.github.io/vos-bud-roof-studio/en/)
 
-<p align="center"><strong>04 roof geometries &nbsp; / &nbsp; 06 material systems &nbsp; / &nbsp; 10 real transformations</strong></p>
+<p align="center"><strong>04 roof geometries &nbsp; / &nbsp; 06 material systems &nbsp; / &nbsp; 10 documented projects</strong></p>
 
 <p align="center"><a href="#the-experience">Experience</a> · <a href="#getting-started">Getting started</a> · <a href="#one-model-two-consumers">Architecture</a> · <a href="#verification">Verification</a> · <a href="#documentation">Documentation</a></p>
 
@@ -27,7 +27,7 @@ Most roofing websites show the finished result. This one connects **the work, th
 
 | Explore | What happens |
 | --- | --- |
-| **[The portfolio](https://defexnn.github.io/vos-bud-roof-studio/en/projects/)** | Ten documented projects with original before/after photographs, draggable comparisons, fullscreen viewing and source Instagram posts. |
+| **[The portfolio](https://defexnn.github.io/vos-bud-roof-studio/en/projects/)** | Ten documented projects with original photographs, clearly labelled separate views, fullscreen viewing and source Instagram posts. Mismatched angles are never overlaid. |
 | **[The roof studio](https://defexnn.github.io/vos-bud-roof-studio/en/studio/)** | Change dimensions, roof shape, pitch, overhang, materials and openings. The actual 3D geometry changes—not just a label or a texture. |
 | **[The material library](https://defexnn.github.io/vos-bud-roof-studio/en/materials/)** | Compare six reference systems on the same roof, with different assemblies, quantities, requirements and costs. |
 | **[The estimate](https://defexnn.github.io/vos-bud-roof-studio/en/estimate/)** | Inspect each formula, purchase quantity, price source and installation task. Adjust net unit prices and export a genuine PDF. |
@@ -55,7 +55,7 @@ These are supplied photographs of V.O.S_BUD's work, not stock imagery. Different
 
 <p align="center"><img src="docs/assets/mobile.webp" width="720" alt="Mobile landing page and roof studio, captured from the running application"></p>
 
-Responsive layouts, touch and keyboard comparisons, accessible controls, reduced-motion support and a geometry-based 2D fallback when WebGL is unavailable.
+Responsive layouts, touch/keyboard gallery navigation, accessible controls, reduced-motion support and a geometry-based 2D fallback when WebGL is unavailable.
 
 </details>
 
@@ -141,6 +141,8 @@ src/
 
 ## Verification
 
+The architectural loft redesign and its [photo replacement brief](docs/PHOTOGRAPHY.md) are described in [design decisions](docs/REDESIGN.md). The recorded public-release checks below predate that redesign; they retain their original revision and date.
+
 The application was checked against both the local production export and its **real GitHub Pages subpath**, including rendered WebGL pixels, downloads and navigation—not only HTTP availability.
 
 | Check | Verified result |
@@ -168,6 +170,8 @@ npx playwright install chromium
 npm run test:browser
 npm run test:a11y
 npm run test:extended
+npm run test:mobile
+npm run test:presentation
 ```
 
 Do not rebuild `out/` while browser checks are running. These checks are not a WCAG certification, structural approval or a physical-device/cross-browser guarantee.
